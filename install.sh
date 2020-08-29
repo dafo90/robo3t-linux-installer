@@ -15,8 +15,8 @@ function install_latest_version {
 	sudo tar -xzf "/tmp/$FILE_NAME" -C /opt
 	sudo rm "/tmp/$FILE_NAME"
 	sudo mv "$INSTALL_PATH"* "$INSTALL_PATH"
-	sudo echo "$CURRENT_VERSION" > "${INSTALL_PATH}/version"
-	echo "Robo3t v${CURRENT_VERSION} installed"
+	sudo su -c "echo '$CURRENT_VERSION' > '${INSTALL_PATH}/version'"
+	echo "Robo 3T v${CURRENT_VERSION} installed"
 }
 
 if [ ! -d "$INSTALL_PATH" ]; then
@@ -30,5 +30,7 @@ else
 		echo "Starting update process"
 		sudo rm -rf "$INSTALL_PATH"
 		install_latest_version "$INSTALLED_VERSION"
+	else
+		echo "Robo 3T is already up-to-date (v${CURRENT_VERSION})"
 	fi
 fi
